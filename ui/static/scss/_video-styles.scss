@@ -1,0 +1,57 @@
+@import 'variables';
+@import 'breakpoints';
+
+.post-video {
+  order: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  
+  .post-video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    width: 100%;
+    
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@include for-tablet-landscape {
+  .post-video {
+    flex: 0 0 30%;
+    max-width: 30%;
+    order: 1;
+  }
+} 
+
+
+.post-right {
+  .post-video {order: 1;}
+
+  @include for-tablet-landscape {
+    .post-video {order: 2;}
+  }
+}
+
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

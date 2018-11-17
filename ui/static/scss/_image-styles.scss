@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'breakpoints';
+
+.post-img {
+  order: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin: 0;
+
+  a {display:block;}
+
+  img {width: 100%;}
+}
+
+@include for-tablet-landscape {
+  .post-img {
+    flex: 0 0 30%;
+    max-width: 30%;
+    order: 1;
+  }
+} 
+
+
+.post-right {
+  .post-img {order: 1;}
+
+  @include for-tablet-landscape {
+    .post-img {order: 2;}
+  }
+}
+
+.post-author-img {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 15px;
+  float: left;
+  margin: 0 5px 0 0;
+}

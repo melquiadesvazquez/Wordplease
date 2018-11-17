@@ -1,0 +1,70 @@
+@import 'variables';
+@import 'breakpoints';
+
+.post {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: $grid-gutter-width;
+
+  .post-col {
+    position: relative;
+    width: 100%;
+
+    &.post-body {
+      background: $white;
+      order: 2;
+      padding: ($grid-gutter-width / 2);
+
+      @include for-tablet-landscape {
+          flex: 0 0 70%;
+          max-width: 70%;
+          order: 2;
+      } 
+    }
+  }
+
+  .post-title {
+    a {text-decoration: none;}
+  }
+
+  &.post-right {
+    .post-body {order: 2;}
+
+    @include for-tablet-landscape {
+      .post-body {order: 1;}
+    }
+  }
+
+  .post-link {
+    text-decoration: $link-decoration;
+    font-weight: $font-weight-bold;
+
+    &:after {
+      content: " \21C1";
+    }
+  }
+
+  .text-right .post-link:before {
+    content: "\21BD ";
+  }
+
+  .text-right .post-link:after {
+    content: "";
+  }
+
+  header, footer {
+    padding: 0;
+  }
+
+  footer {
+    font-size: $font-size-sm;
+
+    p {
+      padding: 3px 0 0;
+    }
+      
+    .post-author-name {
+      font-weight: 600;
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@import 'variables';
+@import 'breakpoints';
+
+#footer {
+  background: $white;
+  margin-top: $grid-gutter-width;
+
+  .container {
+    width: 100%;
+    padding: ($grid-gutter-width / 2);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include for-desktop {
+      max-width: 90%;
+    }
+  }
+
+  p {
+    margin:0;
+    padding: 0;
+    font-family: $font-family-impact;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+
+    li {
+      &:first-child{margin:0;}
+      margin-left: 5px;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% include './partials/head.html' %}
+    <link rel="stylesheet" href="{% static 'style.min.css' %}">
+</head>
+<body>
+
+{% include './partials/header.html' %}
+
+<div id="main" class="box">
+    <div class="box-row">
+
+        {% include './partials/sidebar-left.html' %}
+
+
+        <div class="box-col container wide">
+            <section id="posts">
+                {% block main_body %} {% endblock %}
+            </section>
+        </div>
+
+        {% include './partials/sidebar-right.html' %}
+
+    </div>
+</div>
+
+{% include './partials/footer.html' %}
+
+
+{% if messages %}
+    <hr>
+    {% for message in messages %}
+        <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+</body>
+</html>
