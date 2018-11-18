@@ -1,46 +1,40 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
+from blogs.models import Blog
 from posts.forms import PostForm
 from posts.models import Post
-
-
-class HomeView(View):
-
-    def get(self, request):
-        # 1) Obtener los anuncios de la base de datos que están en estPosto PublicPosto
-        published_posts = Post.objects. \
-            select_related('author'). \
-            filter(status=Post.PUBLISHED). \
-            order_by('-last_modification')
-        posts_list = published_posts[:4]
-
-        # 2) Pasar los anuncios a la plantilla para que ésta los muestre en HTML
-        context = {'posts': posts_list}
-        return render(request, 'posts/home.html', context)
-
-class UserPostsView(View):
-
-    def get(self, request, username):
-        user = get_object_or_404(User, username__iexact=username)
-
-        published_posts = Post.objects.select_related('author').filter(status=Post.PUBLISHED, author=user.id). \
-            order_by('-last_modification')
-
-        posts_list = published_posts[:4]
-
-        context = {'posts': posts_list}
-        return render(request, 'posts/home.html', context)
 
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'posts/post_detail.html'
+
+
+class BlogPostsView(View):
+
+    def get(self, request, blog_slug):
+        blog = get_object_or_404(Blog, slug__iexact=blog_slug)
+
+        published_posts = Post.objects.select_related('author').filter(status=Post.PUBLISHED, blog=blog.id). \
+            order_by('-last_modification')
+
+        posts_list = published_posts[:4]
+
+        context = {'posts': posts_list}
+        return render(request, 'posts/posts.html', context)
+
+
+class BlogsView(ListView):
+    model = Blog
+    template_name = 'posts/blogs.html'
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
 
 
 class NewPostView(View):
@@ -59,3 +53,18 @@ class NewPostView(View):
             messages.success(request, 'Post {0} created successfully!'.format(new_post.title))
             form = PostForm()
         return render(request, 'posts/new_post.html', {'form': form})
+
+
+class HomeView(View):
+
+    def get(self, request):
+        # 1) Obtener los anuncios de la base de datos que están en estPosto PublicPosto
+        published_posts = Post.objects. \
+            select_related('author'). \
+            filter(status=Post.PUBLISHED). \
+            order_by('-last_modification')
+        posts_list = published_posts[:4]
+
+        # 2) Pasar los anuncios a la plantilla para que ésta los muestre en HTML
+        context = {'posts': posts_list}
+        return render(request, 'posts/posts.html', context)

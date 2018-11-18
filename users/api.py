@@ -11,6 +11,8 @@ from users.serializers import UserSerializer, UserListSerializer
 class UsersViewSet(GenericViewSet):
 
     permission_classes = [UserPermission]
+    queryset = User.objects.values('username').distinct()
+    serializer = UserListSerializer(queryset, many=True)
 
     def list(self, request):
         users = User.objects.all()

@@ -39,10 +39,10 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = [
         [None, {
-            'fields': ['image_tag', 'title', 'description', 'content']
+            'fields': ['image_tag', 'image', 'title', 'description', 'content']
         }],
         ['Post meta', {
-            'fields': ['author', 'image', 'status', 'category'],
+            'fields': ['author', 'blog', 'category', 'status'],
             'description': 'Info related with post and more...',
         }],
         ['Post dates', {

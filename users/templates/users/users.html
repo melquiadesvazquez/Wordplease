@@ -6,9 +6,9 @@
     <p>Sell everything that you don't need!</p>
     <hr>
     <div class="posts">
-        {% for author in users %}
-            <a href="{% url 'user_posts' author.username %}" class="post">
-                {{ author.first_name }} {{ author.last_name }}
+        {% for user in object_list %}
+            <a href="{% url 'user_blogs' user.username %}" class="post">
+                {{ user.first_name }} {{ user.last_name }}
             </a>
         {% endfor %}
     </div>

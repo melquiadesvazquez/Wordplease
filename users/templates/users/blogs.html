@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block main_title %} Wordplease {% endblock %}
+
+{% block main_body %}
+    <p>Sell everything that you don't need!</p>
+    <hr>
+    <div class="posts">
+        {% for blog in blogs %}
+            <a href="{% url 'blog_posts' blog.slug %}" class="post">
+                {{ blog.title }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
