@@ -5,7 +5,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from blogs.api import BlogViewSet
-from blogs.views import BlogListView, NewBlogView
+from blogs.views import BlogListView, NewBlogView, BlogDetailView
 from categories.api import CategoryViewSet
 from categories.views import CategoryListView, CategoryDetailView, NewCategoryView
 from posts.api import PostViewSet
@@ -32,6 +32,7 @@ urlpatterns = [
 
     # Blogs
     path('blogs/', BlogListView.as_view(), name='blog_list'),
+    path('blogs/<int:pk>/', BlogDetailView.as_view(), name='blog_detail'),
     path('new-blog/', NewBlogView.as_view(), name='new_blog'),
 
     # Categories
@@ -40,12 +41,14 @@ urlpatterns = [
     path('new-category/', NewCategoryView.as_view(), name='new_category'),
 
     # Posts
-    path('', PostListView.as_view(), name='home'),
     path('blogs/<slug:blog_slug>/', PostListView.as_view(), name='post_list'),
     path('blogs/<slug:blog_slug>/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('new-post/', NewPostView.as_view(), name='new_post'),
 
+    # Home
+    path('', PostListView.as_view(), name='home'),
+
     # API
-    path('api/1.0/', include(router.urls))
+    path('api/v1/', include(router.urls))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

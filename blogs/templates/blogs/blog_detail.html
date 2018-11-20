@@ -1,2 +1,14 @@
-<h1>{{ object.title }} {{ object.description }}</h1>
-<p>{{ object.owner }}</p>
+{% extends "base.html" %}
+
+{% block head_title %} Login {% endblock %}
+
+{% block main_title %} Login {% endblock %}
+
+{% block main_body %}
+
+    <div class="box-col container wide">
+        <h2>{{ object.title }} {{ object.description }}</h2>
+        <p>{{ object.owner }}</p>
+    </div>
+
+{% endblock %}

@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
@@ -23,12 +25,15 @@ class BlogDetailView(DetailView):
 
 class NewBlogView(View):
 
+    @method_decorator(login_required)
     def get(self, request):
         form = BlogForm()
         return render(request, 'blogs/new_blog.html', {'form': form})
 
+    @method_decorator(login_required)
     def post(self, request):
-        form = BlogForm(request.POST)
+        new_blog = Blog(owner=request.user)
+        form = BlogForm(request.POST, instance=new_blog)
 
         if form.is_valid():
             new_blog = form.save()
@@ -36,3 +41,6 @@ class NewBlogView(View):
             form = BlogForm()
 
         return render(request, 'blogs/new_blog.html', {'form': form})
+
+
+

@@ -13,6 +13,9 @@ from posts.models import Post
 
 class PostListView(ListView):
 
+    template_name = 'posts/post_list.html'
+    paginate_by = 10
+
     def get_queryset(self):
         queryset = Post.objects. \
             select_related('blog'). \
@@ -39,7 +42,7 @@ class NewPostView(View):
     @method_decorator(login_required)
     def get(self, request):
         form = PostForm(request.user)
-        return render(request, 'posts/new_Post.html', {'form': form})
+        return render(request, 'posts/new_post.html', {'form': form})
 
     @method_decorator(login_required)
     def post(self, request):
@@ -51,4 +54,4 @@ class NewPostView(View):
             messages.success(request, 'Post {0} created successfully!'.format(new_post.title))
             form = PostForm()
 
-        return render(request, 'posts/new_Post.html', {'form': form})
+        return render(request, 'posts/new_post.html', {'form': form})

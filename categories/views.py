@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
@@ -23,10 +25,12 @@ class CategoryDetailView(DetailView):
 
 class NewCategoryView(View):
 
+    @method_decorator(login_required)
     def get(self, request):
         form = CategoryForm()
         return render(request, 'categories/new_category.html', {'form': form})
 
+    @method_decorator(login_required)
     def post(self, request):
         form = CategoryForm(request.POST)
 

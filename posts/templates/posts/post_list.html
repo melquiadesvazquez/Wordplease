@@ -9,11 +9,11 @@
     <div class="box-col container wide">
         <section id="posts">
             {% for post in object_list %}
-                <article class="post {% cycle '' 'post-right' %}">
+                   <article class="post {% cycle '' 'post-right' %}">
                     {% if post.video %}
-                        {% include '../posts/video.html' %}
+                        {% include 'partials/video.html' %}
                     {% else %}
-                        {% include '../posts/image.html' %}
+                        {% include 'partials/image.html' %}
                     {% endif %}
                     <div class="post-col post-body">
                         <header>
@@ -32,9 +32,12 @@
                         </footer>
                     </div>
                 </article>
+
             {% empty %}
                 <p>No posts yet.</p>
             {% endfor %}
+
+            {% include 'partials/pagination.html' %}
         </section>
     </div>
 

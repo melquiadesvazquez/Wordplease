@@ -2,20 +2,43 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 
-class UserListSerializer(serializers.ModelSerializer):
+class UserListSerializer(serializers.Serializer):
 
-    class Meta:
-
-        model = User
-        fields = ['id', 'username', 'first_name', 'last_name']
+    id = serializers.ReadOnlyField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    username = serializers.CharField()
 
 
 class UserSerializer(UserListSerializer):
 
-    class Meta(UserListSerializer.Meta):
+    email = serializers.EmailField()
+    password = serializers.CharField()
 
-        fields = '__all__'
-        read_only_fields = ['id', 'date_joined']
+    def create(self, validated_data):
+        user = User()
+        return self.update(user, validated_data)
 
+    def update(self, instance, validated_data):
+        instance.first_name = validated_data.get('first_name')
+        instance.last_name = validated_data.get('last_name')
+        instance.username = validated_data.get('username')
+        instance.email = validated_data.get('email')
+        instance.set_password(validated_data.get('password'))
+        instance.save()
+        return instance
 
+    def validate_username(self, value):
+        """
+        Validation when updating user
+        """
+        if self.instance is not None and self.instance.username != value and User.objects.filter(username=value).exists():
+            raise serializers.ValidationError('Username {0} already exists'.format(value))
 
+        """
+        Validation when creating user
+        """
+        if self.instance is None and User.objects.filter(username=value).exists():
+            raise serializers.ValidationError('Username {0} already exists'.format(value))
+
+        return value

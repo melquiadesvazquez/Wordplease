@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 
 from categories.models import Category
+from categories.permissions import CategoryPermission
 from categories.serializers import CategorySerializer, CategoryListSerializer
 
 
@@ -8,6 +9,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
     """
     A viewset that provides the standard actions
     """
+
+    permission_classes = [CategoryPermission]
     queryset = Category.objects.all()
 
     def get_serializer_class(self):

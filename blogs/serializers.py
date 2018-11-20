@@ -5,10 +5,18 @@ from blogs.models import Blog
 
 class BlogListSerializer(serializers.ModelSerializer):
 
-    class Meta:
+    owner_fullname = serializers.SerializerMethodField()
+    owner_username = serializers.SerializerMethodField()
 
+    def get_owner_fullname(self, obj):
+        return '{0} {1}'.format(obj.owner.first_name, obj.owner.last_name)
+
+    def get_owner_username(self, obj):
+        return obj.owner.username
+
+    class Meta:
         model = Blog
-        fields = ['id', 'owner', 'title']
+        fields = ['id', 'title', 'owner_fullname', 'owner_username']
 
 
 class BlogSerializer(BlogListSerializer):
