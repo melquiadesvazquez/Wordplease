@@ -6,20 +6,29 @@
 
 {% block main_body %}
 
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            Username
-            <input type="text" name="form_username" placeholder="Your username">
-        </div>
-
-        <div>
-            Password
-            <input type="password" name="form_password" placeholder="Your password">
-        </div>
-
-        <button type="submit">Login</button>
-
-    </form>
+    <div class="box-col container wide">
+        <h2>Do you have an account?</h2>
+        <section>
+            <form id="comment-form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="form_username" class="sr-only">Name</label>
+                    <input class="form-control" type="text" name="form_username" id="form_username" required placeholder="Your username">
+                </div>
+                <div class="form-group">
+                    <label for="form_password" class="sr-only">Email</label>
+                    <input class="form-control" type="password" name="form_password" id="form_password" required placeholder="Your password">
+                </div>
+                <button type="submit" class="btn" id="comment-submit">Login</button>
+                {% if messages %}
+                    <div id="notice">
+                        {% for message in messages %}
+                            <div class="message {{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+        </section>
+    </div>
 
 {% endblock %}

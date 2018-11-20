@@ -24,7 +24,8 @@ class Post(models.Model):
     description = models.TextField()
     content = models.TextField()
     image = models.FileField()
-    likes = models.IntegerField(default=0)
+    video = models.CharField(max_length=150, blank=True, default='')
+
     status = models.CharField(max_length=3, choices=STATUS)
     slug = models.SlugField()
     pub_date = models.DateTimeField(auto_now_add=True)
@@ -39,3 +40,11 @@ class Post(models.Model):
         """
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+
+    """
+    def clean(self):
+        if self.status == DRAFT and self.pub_date is not None:
+            raise ValidationError('Draft entries may not have a publication date.')
+        if self.status == PUBLISHED and self.pub_date is None:
+            self.pub_date = datetime.date.today()
+    """

@@ -3,12 +3,14 @@ from django.template.defaultfilters import slugify
 
 
 class Category(models.Model):
+
     class Meta:
         verbose_name_plural = "categories"
 
     DEFAULT_PK = 1
 
-    name = models.CharField(max_length=30, default="Uncategorized")
+    name = models.CharField(max_length=30)
+    description = models.TextField()
     slug = models.SlugField()
 
     def __str__(self):

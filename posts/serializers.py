@@ -8,7 +8,7 @@ class PostListSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Post
-        fields = ['id', 'title', 'description', 'image']
+        fields = ['id', 'title', 'description']
 
 
 class PostSerializer(PostListSerializer):
@@ -16,4 +16,4 @@ class PostSerializer(PostListSerializer):
     class Meta(PostListSerializer.Meta):
 
         fields = '__all__'
-        read_only_fields = ['author']
+        read_only_fields = ['id', 'blog', 'author', 'slug']

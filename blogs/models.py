@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 class Blog(models.Model):
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     description = models.TextField()
     slug = models.SlugField()

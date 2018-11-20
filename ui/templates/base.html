@@ -4,7 +4,7 @@
 <head>
 
     {% include './partials/head.html' %}
-    <link rel="stylesheet" href="{% static 'style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
 </head>
 <body>
 
@@ -15,14 +15,7 @@
 
         {% include './partials/sidebar-left.html' %}
 
-
-        <div class="box-col container wide">
-            <section id="posts">
-                {% block main_body %} {% endblock %}
-            </section>
-        </div>
-
-        {% include './partials/sidebar-right.html' %}
+        {% block main_body %} {% endblock %}
 
     </div>
 </div>

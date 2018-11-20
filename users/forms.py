@@ -1,23 +1,17 @@
-from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import NON_FIELD_ERRORS
+from django.forms import ModelForm
 
 
-class SignupForm(forms.Form):
+class UserForm(ModelForm):
 
-    username = forms.CharField()
-    first_name = forms.CharField(required=False)
-    last_name = forms.CharField(required=False)
-    email = forms.EmailField(required=False)
-    password = forms.CharField(widget=forms.PasswordInput())
-    password_confirmation = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
 
-    def clean_username(self):
-        username = self.cleaned_data.get('username', '').lower()
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError('User {0} already exists'.format(username))
-        return username
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'password']
 
-    def clean(self):
-        data = super().clean()
-        if data.get('password') != data.get('password_confirmation'):
-            raise forms.ValidationError('Passwords don\'t match')
+        error_messages = {
+            NON_FIELD_ERRORS: {
+                'unique_together': "%(model_name)s's %(field_labels)s are not unique.",
+            }
+        }

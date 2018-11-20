@@ -1,13 +1,12 @@
-{% extends "base.html" %}
+{% if messages %}
+    <hr>
+    {% for message in messages %}
+        <div class="message {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+{% endif %}
 
-{% block head_title %} New post {% endblock %}
-
-{% block main_title %} New post {% endblock %}
-
-{% block main_body %}
-    <form method="post" novalidate enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create new post</button>
-    </form>
-{% endblock %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send">
+</form>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block head_title %} Login {% endblock %}
+
+{% block main_title %} Login {% endblock %}
+
+{% block main_body %}
+
+    <div class="box-col container wide">
+        <section id="posts">
+            {% for post in object_list %}
+                <article class="post {% cycle '' 'post-right' %}">
+                    {% if post.video %}
+                        {% include '../posts/video.html' %}
+                    {% else %}
+                        {% include '../posts/image.html' %}
+                    {% endif %}
+                    <div class="post-col post-body">
+                        <header>
+                            <h2 class="post-title"><a href="{% url 'post_detail' post.blog.slug post.id %}">{{ post.title }}</a></h2>
+                            <div class="post-text">{{ post.description|safe }}</div>
+                            <p><a class="post-link" href="{% url 'post_detail' post.blog.slug post.id %}">Continue reading</a></p>
+                        </header>
+                        <footer>
+                            <figure class="post-author-img">
+                                <img src="https://picsum.photos/200/200/?image=1027" alt="{{ post.author }}">
+                            </figure>
+                            <p>
+                                <span class="post-author-name">{{ post.author.first_name }} {{ post.author.last_name }}</span> |
+                                <time class="post-time" datetime="{{ post.pub_date }}">{{ post.pub_date|date:"d M, Y" }}</time>
+                            </p>
+                        </footer>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No posts yet.</p>
+            {% endfor %}
+        </section>
+    </div>
+
+{% endblock %}

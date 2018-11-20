@@ -1,21 +1,39 @@
 {% extends "base.html" %}
 
-{% block head_title %} {{ post.title }} {% endblock %}
+{% block head_title %} Login {% endblock %}
 
-{% block main_title %} {{ post.title }} {% endblock %}
+{% block main_title %} Login {% endblock %}
 
 {% block main_body %}
-    <p>{{ post.description }}</p>
-    <div>
-        <img src="{{ post.image.url }}" alt="{{ post.title }}" title="{{ post.title }}" width="600">
+
+    <div class="box-col container">
+        <section id="post">
+            <article class="post post-detail">
+                {% if post.video %}
+                    {% include '../posts/video.html' %}
+                {% else %}
+                    {% include '../posts/image.html' %}
+                {% endif %}
+                <div class="post-col post-body">
+                    <header>
+                        <h2 class="post-title">{{ post.title }}</h2>
+                        <div class="post-text">{{ post.description|safe }}</div>
+                        <p class="text-right"><a class="post-link" href="{% url 'post_list' post.blog.slug %}">Back home</a></p>
+                    </header>
+                    <footer>
+                        <figure class="post-author-img">
+                            <img src="https://picsum.photos/200/200/?image=1027" alt="{{ post.author }}">
+                        </figure>
+                        <p>
+                            <span class="post-author-name">{{ post.author.first_name }} {{ post.author.last_name }}</span> |
+                            <time class="post-time" datetime="{{ post.pub_date }}">{{ post.pub_date|date:"d M, Y" }}</time>
+                        </p>
+                    </footer>
+                </div>
+            </article>
+        </section>
     </div>
-    <p>
-        <strong>Description: {{ post.description }}</strong>
-        <br>
-        <strong>Status: {{ post.get_status_display }}</strong>
-        <br>
-        <strong>Pub date: {{ post.pub_date|date:"d/m/Y H:i" }}</strong>
-        <br>
-        <strong>Author: {{ post.author.first_name }} {{ post.author.last_name }}</strong>
-    </p>
+
+    {% include '../partials/sidebar-right.html' %}
+
 {% endblock %}

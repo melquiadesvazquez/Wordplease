@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(ww@e#e!^cnchp*se36)@%^z3lt+0v2xsj!l&e_r&agt%wj7(j'
+SECRET_KEY = 'a0)7d#)ir_3qwp5!-2)hbhxvnb!64l+5az_i)&7t95p#@c7**7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -70,8 +70,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        },
-    },
+            'libraries':{
+                'startswith': 'posts.templatetags.post_extras'
+            }
+        }
+    }
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
@@ -79,6 +82,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -124,12 +128,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/assets/'
+STATIC_URL = '/static/'
+
 
 # Media files
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/uploads/'
+
 
 # SQL Logging
 
@@ -160,8 +166,10 @@ LOGGING = {
 
 LOGIN_URL = 'login'
 
+
 # Append slash to urls
 APPEND_SLASH = True
+
 
 # REST Framework
 REST_FRAMEWORK = {
