@@ -7,6 +7,7 @@ from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
 from blogs.models import Blog
+from categories.models import Category
 from posts.forms import PostForm
 from posts.models import Post
 
@@ -14,19 +15,22 @@ from posts.models import Post
 class PostListView(ListView):
 
     template_name = 'posts/post_list.html'
-    paginate_by = 10
+    paginate_by = 3
 
     def get_queryset(self):
         queryset = Post.objects. \
             select_related('blog'). \
             select_related('author'). \
-            select_related('category'). \
             filter(status=Post.PUBLISHED). \
             order_by('-last_modification')
 
         if 'blog_slug' in self.kwargs:
             blog = get_object_or_404(Blog, slug__iexact=self.kwargs['blog_slug'])
             queryset = queryset.filter(blog=blog.id)
+
+        category_id = self.request.GET.get('category', '')
+        if category_id != '':
+            queryset = queryset.filter(category=category_id)
 
         return queryset
 
@@ -52,6 +56,6 @@ class NewPostView(View):
         if form.is_valid():
             new_post = form.save()
             messages.success(request, 'Post {0} created successfully!'.format(new_post.title))
-            form = PostForm()
+            form = PostForm(request.user)
 
         return render(request, 'posts/new_post.html', {'form': form})

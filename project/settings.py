@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'categories',
     'posts',
     'ui',
+    'files',
     'rest_framework',
     'django_filters'
 ]
@@ -72,7 +73,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries':{
-                'startswith': 'posts.templatetags.post_extras'
+                'custom_tags': 'ui.templatetags.custom_tags'
             }
         }
     }
@@ -175,7 +176,7 @@ APPEND_SLASH = True
 # REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 3,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',

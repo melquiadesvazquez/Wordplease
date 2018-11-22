@@ -16,4 +16,4 @@ class CategorySerializer(CategoryListSerializer):
     class Meta(CategoryListSerializer.Meta):
 
         fields = '__all__'
-        read_only_fields = ['id', 'owner', 'slug']
+        read_only_fields = ['id', 'slug']

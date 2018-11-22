@@ -8,6 +8,7 @@ from blogs.api import BlogViewSet
 from blogs.views import BlogListView, NewBlogView, BlogDetailView
 from categories.api import CategoryViewSet
 from categories.views import CategoryListView, CategoryDetailView, NewCategoryView
+from files.api import FileViewSet
 from posts.api import PostViewSet
 from posts.views import PostListView, PostDetailView, NewPostView
 from users.api import UserViewSet
@@ -18,6 +19,7 @@ router.register('users', UserViewSet)
 router.register('blogs', BlogViewSet)
 router.register('categories', CategoryViewSet)
 router.register('posts', PostViewSet)
+router.register('files', FileViewSet)
 
 urlpatterns = [
     # Admin

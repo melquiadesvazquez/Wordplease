@@ -13,7 +13,7 @@ class UserListView(ListView):
 
     model = User
     template_name = 'users/user_list.html'
-    paginate_by = 10
+    paginate_by = 3
 
 
 class UserDetailView(DetailView):

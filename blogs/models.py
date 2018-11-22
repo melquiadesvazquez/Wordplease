@@ -7,7 +7,7 @@ class Blog(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    description = models.TextField()
+    description = models.TextField(max_length=150, blank=True, default='')
     slug = models.SlugField()
 
     def __str__(self):

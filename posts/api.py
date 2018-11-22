@@ -13,12 +13,12 @@ class PostViewSet(viewsets.ModelViewSet):
     """
 
     permission_classes = [PostPermission]
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-pub_date')
 
     filter_backends = [OrderingFilter, SearchFilter, DjangoFilterBackend]
-    search_fields = ['name', 'description', 'owner__first_name', 'owner__last_name']
-    ordering = ['id', 'price', 'status', 'name', 'pub_date', 'last_modification']
-    filter_fields = ['status', 'owner', 'price']
+    search_fields = ['title', 'description', 'author__username', 'author__first_name', 'author__last_name']
+    ordering = ['id', 'title', 'status', 'pub_date']
+    filter_fields = ['status', 'author', 'title', 'category']
 
     def get_queryset(self):
         return self.queryset if self.request.user.is_authenticated else self.queryset.filter(status=Post.PUBLISHED)

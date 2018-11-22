@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
+from rest_framework.exceptions import ValidationError
 
 from blogs.models import Blog
 from categories.models import Category
@@ -18,12 +19,12 @@ class Post(models.Model):
 
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.SET_DEFAULT, default=Category.DEFAULT_PK)
+    category = models.ManyToManyField(Category)
 
     title = models.CharField(max_length=150)
     description = models.TextField()
     content = models.TextField()
-    image = models.FileField()
+    image = models.FileField(blank=True, default='')
     video = models.CharField(max_length=150, blank=True, default='')
 
     status = models.CharField(max_length=3, choices=STATUS)
@@ -36,6 +37,26 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         """
+        Automatically assigns the post to one blog of the user
+        """
+        if self.blog_id is None:
+            blog = Blog.objects.filter(owner=self.author).first()
+            if blog is None:
+                raise ValidationError('blog field is missing or not valid.')
+            else:
+                self.blog_id = blog.id
+
+        """
+        Automatically assigns the post to one of the categories
+        """
+        if self.category_id is None:
+            category = Category.objects.first()
+            if category is None:
+                raise ValidationError('category field is missing or not valid.')
+            else:
+                self.category_id = category.id
+
+        """
         Automatically converts the post title into a slug
         """
         self.slug = slugify(self.title)
@@ -43,6 +64,7 @@ class Post(models.Model):
 
     """
     def clean(self):
+
         if self.status == DRAFT and self.pub_date is not None:
             raise ValidationError('Draft entries may not have a publication date.')
         if self.status == PUBLISHED and self.pub_date is None:

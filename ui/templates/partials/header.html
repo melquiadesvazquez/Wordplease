@@ -1,14 +1,17 @@
+{% load custom_tags %}
 <header id="header">
     <div class="container">
         <h1><a href="/">Wordplease</a></h1>
 
         <nav id="menuTop">
             <a id="menuBtn" href="#"><i class="fa fa-bars"></i></a>
+
             <ul>
-                <li><a href="#economy">economy</a></li>
-                <li><a href="#technology">technology</a></li>
-                <li><a href="#studies">lifestyle</a></li>
-                <li><a href="#sports">sports</a></li>
+                <li><a href="./">All</a></li>
+                {% get_categories as categories %}
+                {% for category in categories %}
+                    <li><a href="./?category={{ category.id }}">{{ category.name }}</a></li>
+                {% endfor %}
             </ul>
         </nav>
 

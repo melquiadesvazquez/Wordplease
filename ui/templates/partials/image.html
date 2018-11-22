@@ -1,4 +1,4 @@
-{% load startswith %}
+{% load custom_tags %}
 <figure class="post-col post-img">
     <a href="{% url 'post_detail' post.blog.slug post.id %}">
         {% if post.image.name|startswith:'https://picsum.photos' %}

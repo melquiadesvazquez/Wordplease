@@ -1,11 +1,61 @@
 # Wordplease
-Exercise 7 for the module Python and Django for the Keepcoding Web Development Bootcamp
 
+[![MIT License][license-image]][license-url]
 
-/ Ultimos posts publicados
+Website similar to https://medium.com (blogging platform) built with Python, Django and Django REST Framework.
 
-/blogs/<nombre_de_usuario>/  Ultimos posts de usuario
+## Prerequisites
 
+You need to install the following software on your machine before running this project:
+
+1. Python  &ndash; <https://www.python.org/>
+2. pip (Python package manager)  &ndash; <https://pip.pypa.io/en/latest/installing/>
+
+To continue the installation you can follow this tutorial  <https://docs.djangoproject.com/en/2.1/intro/install/>
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+Download the repository from GitHub
+
+```shell
+git clone https://github.com/melquiadesvazquez/Wordplease.git
+```
+
+Install de project with pip
+
+```shell
+cd Wordplease
+pip install -r requirements.txt
+```
+
+Import the sample database
+
+```shell
+python manage.py loaddata db.json
+```
+
+Copy .env.example to .env and review the values to match your preferences.
+
+```shell
+mv .env.example .env
+```
+
+Get a development environment running
+```shell
+python manage.py runserver
+```
+
+## Testing website
+
+Open your browser and go to:
+
++ Website &ndash; http://127.0.0.1:8000
+
+![Melpress homepage](https://raw.githubusercontent.com/melquiadesvazquez/MelPress/master/src/assets/web1.jpg)
+
+![Melpress post page](https://raw.githubusercontent.com/melquiadesvazquez/MelPress/master/src/assets/web2.jpg)
 
 ## RESTful API services
 
@@ -32,24 +82,48 @@ The following endpoints are available (end slash is mandatory):
 ### Blogs API
 
 + `GET /api/v1/blogs/` Any user can display a list of urls from the blogs available in the platform. 
-+ `GET /api/v1/blogs/?search=test&ordering=title&owner=1` Standard parameters are available for searching, ordering and filtering 
++ `GET /api/v1/blogs/?search=test&ordering=title&owner_username=test` Standard parameters are available for searching, ordering and filtering 
 
 
 ### Posts API
-• Un endpoint para poder leer los artículos de un blog de manera que, si el usuario no está
-autenticado, mostrará sólo los artículos publicados. Si el usuario está autenticado y es el
-propietario del blog o un administrador, podrá ver todos los artículos (publicados o no). En este
-endpoint se deberá mostrar únicamente el título del post, la imagen, el resumen y la fecha de
-publicación. Este endpoint debe permitir buscar posts por título o contenido y ordenarlos por
-título o fecha de publicación. Por defecto los posts deberán venir ordenados por fecha de
-publicación descendente.
-• Un endpoint para crear posts en el cual el usuario deberá estar autenticado. En este endpoint el
-post quedará publicado automáticamente en el blog del usuario autenticado.
-• Un endpoint de detalle de un post, en el cual se mostrará toda la información del POST. Si el
-post no es público, sólo podrá acceder al mismo el dueño del post o un administrador.
-• Un endpoint de actualización de un post. Sólo podrá acceder al mismo el dueño del post o un
-administrador.
-• Un endpoint de borrado de un post. Sólo podrá acceder al mismo el dueño del post o un
-administrador.
+
++ `GET /api/v1/posts/` Any user can display the published posts and the owned unpublished when authenticated
++ `GET /api/v1/posts/?search=test&ordering=pub_date&status=PUB` Standard parameters are available for searching, ordering and filtering 
++ `POST /api/v1/posts/` Admin and authenticated users will be able to publish posts on their own blogs. If the parameter blog is not present, the post will be assigned to one of the blogs of the user
+```json
+{
+    "title": "this is the title",
+    "description": "this is the description",
+    "content": "this is the content",
+    "video": "https://www.youtube.com/embed/1CRihg1X89A",
+    "status": "PUB"
+}
+```
+
++ `GET /api/v1/posts/<id>/` Any user will be able to display a post's detail as long as it's published.
++ `PUT /api/v1/posts/<id>/` Only admin and authenticated users will be able to update their own post.
++ `DELETE /api/v1/posts/<id>/` Only admin and authenticated users will be able to delete their own account.
+
+### Files API
+
++ `GET /api/v1/files/`  Only admin and authenticated users will be able to display the files 
++ `POST /api/v1/files/` Only admin and authenticated users will be able to upload files 
+
+## Built with
+
++ [Nodejs](https://nodejs.org/) - JavaScript run-time environment
++ [Webpack](https://webpack.js.org/) - JavaScript module bundler
++ [JSON server](https://github.com/typicode/json-server) - REST API with CRUD operations based on a json file
++ [SASS](https://sass-lang.com/) - CSS preprocessor scripting language
+
+## Restrictions
+
++ The live demo is connected with a third party JSON server on https://my-json-server.typicode.com, due to this, database updates are not allowed and new comments won't be created. However, that functionality should work on local.
+
+## License
+
+[MIT][license-url]
 
 
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE

@@ -7,7 +7,7 @@ class UserPermission(BasePermission):
         """
         Grands permissions if superuser or any user doing 'create', 'retrieve', 'update', 'destroy'
         """
-        return request.user.is_superuser or view.action in ['create', 'retrieve', 'update', 'destroy']
+        return view.action in ('create') or request.user.is_superuser
 
     def has_object_permission(self, request, view, obj):
         """
