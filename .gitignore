@@ -6,6 +6,9 @@ venv/
 __pycache__/
 *.pyc
 
+# Local settings
+local_settings.py
+
 # IDE config
 .idea/
 .vscode/
