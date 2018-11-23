@@ -27,10 +27,6 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-in_heroku = False
-if 'DATABASE_URL' in config:
-    in_heroku = True
-
 ALLOWED_HOSTS = []
 
 
@@ -92,7 +88,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 
-if in_heroku:
+if config('DATABASE_URL', default=False, cast=bool):
     DATABASES = {'default': django_heroku.dj_database_url.config()}
 else:
     DATABASES = {
