@@ -1,25 +1,5 @@
 [
   {
-    "model": "blogs.blog",
-    "pk": 4,
-    "fields": {
-      "owner": 1,
-      "title": "Help Scout",
-      "description": "For quick jigs vex! Fox nymphs grab quick-jived waltz",
-      "slug": "help-scout"
-    }
-  },
-  {
-    "model": "blogs.blog",
-    "pk": 5,
-    "fields": {
-      "owner": 2,
-      "title": "Nerd Fitness",
-      "description": "Quick wafting zephyrs vex bold Jim",
-      "slug": "nerd-fitness"
-    }
-  },
-  {
     "model": "categories.category",
     "pk": 4,
     "fields": {
@@ -56,35 +36,95 @@
     }
   },
   {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$Z7nZXnxWM69I$LdFfirqBWJ4pdwAxaixzhWh0dgCN8ynwj/2HTZC6WlE=",
+      "last_login": "2018-11-22T17:22:55.821Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "Ad",
+      "last_name": "Min",
+      "email": "admin@admin.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-11-19T10:28:33Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$jxmdAd5lrTNn$3SKlad/rEVACdPUAurcDPVu3fF/HXIpeod6NHNTaui4=",
+      "last_login": "2018-11-19T16:29:37.988Z",
+      "is_superuser": false,
+      "username": "kc",
+      "first_name": "Keep",
+      "last_name": "Coding",
+      "email": "keep@coding.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2018-11-19T10:43:37Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "blogs.blog",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "title": "Admin Blog",
+      "description": "This is the admin blog",
+      "slug": "admin-blog"
+    }
+  },
+  {
+    "model": "blogs.blog",
+    "pk": 2,
+    "fields": {
+      "owner": 2,
+      "title": "KC Blog",
+      "description": "This is the kc blog",
+      "slug": "kc-blog"
+    }
+  },
+  {
     "model": "posts.post",
     "pk": 4,
     "fields": {
-      "blog": 4,
+      "blog": 1,
       "author": 1,
-      "category": 4,
       "title": "Big July earthquakes confound zany experimental vow",
       "description": "<p>Adjusting quiver and bow, Zompyc[1] killed the fox. My faxed joke won a pager in the cable TV quiz show. Amazingly few discotheques provide jukeboxes. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz.</p>",
       "content": "<p>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack.</p><p>Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! \"Now fax quiz Jack! \" my brave ghost pled.</p><p>Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq.</p>",
       "image": "https://picsum.photos/960/540/?image=1084",
+      "video": "",
       "status": "PUB",
-      "pub_date": "2018-09-22T01:02:58Z",
-      "last_modification": "2018-09-22T01:02:58Z"
+      "slug": "",
+      "pub_date": "2018-09-22T01:02:58.253Z",
+      "last_modification": "2018-09-22T01:02:58Z",
+      "category": []
     }
   },
   {
     "model": "posts.post",
     "pk": 5,
     "fields": {
-      "blog": 5,
-      "author": 1,
-      "category": 5,
+      "blog": 2,
+      "author": 2,
       "title": "The quick, brown fox jumps over a lazy dog",
       "description": "<p>Adjusting quiver and bow, Zompyc[1] killed the fox. My faxed joke won a pager in the cable TV quiz show. Amazingly few discotheques provide jukeboxes. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz.</p>",
       "content": "<p>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex.</p><p>Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! \"Now fax quiz Jack! \" my brave ghost pled.</p>",
+      "image": "",
       "video": "https://www.youtube.com/embed/1CRihg1X89A",
       "status": "PUB",
-      "pub_date": "2018-09-21T01:02:58Z",
-      "last_modification": "2018-09-21T01:02:58Z"
+      "slug": "",
+      "pub_date": "2018-09-21T01:02:58.253Z",
+      "last_modification": "2018-09-21T01:02:58Z",
+      "category": []
     }
   }
 ]
