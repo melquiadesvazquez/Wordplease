@@ -202,9 +202,7 @@ MIDDLEWARE_CLASSES = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_DIRS = [
-    "/ui/static"
-]
+STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
