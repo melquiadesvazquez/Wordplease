@@ -177,10 +177,12 @@ LOGIN_URL = 'login'
 
 
 # Append slash to urls
+
 APPEND_SLASH = True
 
 
 # REST Framework
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
@@ -196,3 +198,16 @@ REST_FRAMEWORK = {
         'rest_framework_yaml.parsers.YAMLParser'
     )
 }
+
+# Middlewares
+
+MIDDLEWARE_CLASSES = (
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+    'whitenoise.middleware.WhiteNoiseMiddleware'
+)
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
