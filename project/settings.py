@@ -130,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'ui/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 # Media files
@@ -201,6 +201,10 @@ MIDDLEWARE_CLASSES = (
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_DIRS = [
+    "/ui/static"
+]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
