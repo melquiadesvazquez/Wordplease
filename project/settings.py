@@ -26,7 +26,7 @@ SECRET_KEY = 'a0)7d#)ir_3qwp5!-2)hbhxvnb!64l+5az_i)&7t95p#@c7**7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,10 +88,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': django_heroku.dj_database_url.config(
+      default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
+    )
 }
 
 
@@ -207,9 +206,8 @@ REST_FRAMEWORK = {
 # Middlewares
 
 MIDDLEWARE_CLASSES = (
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
-    'whitenoise.middleware.WhiteNoiseMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 # Simplified static file serving.
