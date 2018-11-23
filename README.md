@@ -4,6 +4,8 @@
 
 Website similar to https://medium.com (blogging platform) built with Python, Django and Django REST Framework.
 
+Live demo available on https://melwordplease.herokuapp.com
+
 ## Prerequisites
 
 You need to install the following software on your machine before running this project:
@@ -52,6 +54,7 @@ python manage.py runserver
 Open your browser and go to:
 
 + Website &ndash; http://127.0.0.1:8000
++ Alternatively, check the live demo [here](https://melwordplease.herokuapp.com/)
 
 ![Melpress homepage](https://raw.githubusercontent.com/melquiadesvazquez/MelPress/master/src/assets/web1.jpg)
 
