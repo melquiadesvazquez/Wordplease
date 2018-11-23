@@ -26,7 +26,7 @@ SECRET_KEY = 'a0)7d#)ir_3qwp5!-2)hbhxvnb!64l+5az_i)&7t95p#@c7**7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -88,9 +88,10 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 DATABASES = {
-    'default': django_heroku.dj_database_url.config(
-      default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -130,8 +131,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
 
 # Media files
 
@@ -170,12 +171,10 @@ LOGIN_URL = 'login'
 
 
 # Append slash to urls
-
 APPEND_SLASH = True
 
 
 # REST Framework
-
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
@@ -192,19 +191,5 @@ REST_FRAMEWORK = {
     )
 }
 
-# Middlewares
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-)
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-
-STATICFILES_DIRS = [(os.path.join(BASE_DIR, 'static'))]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Activate Django-Heroku.
 django_heroku.settings(locals())
