@@ -19,7 +19,7 @@ class Post(models.Model):
 
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category, related_name="posts")
 
     title = models.CharField(max_length=150)
     description = models.TextField()
@@ -37,7 +37,7 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Automatically assigns the post to one blog of the user
+        Automatically assigns the post to one the user's blog
         """
         if self.blog_id is None:
             blog = Blog.objects.filter(owner=self.author).first()
@@ -45,16 +45,6 @@ class Post(models.Model):
                 raise ValidationError('blog field is missing or not valid.')
             else:
                 self.blog_id = blog.id
-
-        """
-        Automatically assigns the post to one of the categories
-        """
-        if self.category_id is None:
-            category = Category.objects.first()
-            if category is None:
-                raise ValidationError('category field is missing or not valid.')
-            else:
-                self.category_id = category.id
 
         """
         Automatically converts the post title into a slug

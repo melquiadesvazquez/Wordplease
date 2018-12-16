@@ -32,7 +32,13 @@ class NewUserView(View):
         form = UserForm(request.POST)
 
         if form.is_valid():
-            new_user = form.save()
+            new_user = User()
+            new_user.first_name = form.cleaned_data.get('first_name')
+            new_user.last_name = form.cleaned_data.get('last_name')
+            new_user.username = form.cleaned_data.get('username')
+            new_user.email = form.cleaned_data.get('email')
+            new_user.set_password(form.cleaned_data.get('password'))
+            new_user.save()
             messages.success(request, 'User {0} created successfully!'.format(new_user.username))
             form = UserForm()
 

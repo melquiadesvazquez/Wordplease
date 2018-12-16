@@ -7,7 +7,6 @@ from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
 from blogs.models import Blog
-from categories.models import Category
 from posts.forms import PostForm
 from posts.models import Post
 

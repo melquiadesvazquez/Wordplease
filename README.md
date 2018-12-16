@@ -25,11 +25,37 @@ Download the repository from GitHub
 git clone https://github.com/melquiadesvazquez/Wordplease.git
 ```
 
+Setup the virtual env for Linux
+
+```
+virtualenv env
+source env/bin/activate
+```
+
+Setup the virtual env for Windows
+
+```
+virtualenv env
+env/Scripts/activate
+```
+
 Install de project with pip
 
 ```shell
 cd Wordplease
 pip install -r requirements.txt
+```
+
+Create database
+
+```shell
+python manage.py migrate
+```
+
+Create superuser
+
+```shell
+python manage.py createsuperuser
 ```
 
 Import the sample database
