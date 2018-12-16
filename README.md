@@ -23,6 +23,7 @@ Download the repository from GitHub
 
 ```shell
 git clone https://github.com/melquiadesvazquez/Wordplease.git
+cd Wordplease
 ```
 
 Setup the virtual env for Linux
@@ -46,6 +47,12 @@ cd Wordplease
 pip install -r requirements.txt
 ```
 
+Copy .env.example to .env and review the values to match your preferences.
+
+```shell
+mv .env.example .env
+```
+
 Create database
 
 ```shell
@@ -62,12 +69,6 @@ Import the sample database
 
 ```shell
 python manage.py loaddata db.json
-```
-
-Copy .env.example to .env and review the values to match your preferences.
-
-```shell
-mv .env.example .env
 ```
 
 Get a development environment running
