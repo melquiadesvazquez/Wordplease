@@ -29,15 +29,15 @@ cd Wordplease
 Setup the virtual env for Linux
 
 ```
-virtualenv env
+python -m venv env
 source env/bin/activate
 ```
 
 Setup the virtual env for Windows
 
 ```
-virtualenv env
-env/Scripts/activate
+python -m venv env
+.\env\Scripts\activate
 ```
 
 Install de project with pip
